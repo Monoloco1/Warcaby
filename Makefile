@@ -1,4 +1,4 @@
-CC=gcc
+CC=g++
 CFLAGS=-I. #-lsctp
 #CFLAGS=
 
@@ -6,7 +6,7 @@ OBJECTS = warcaby_client warcaby_serwer
 
 all: $(OBJECTS)
 
-$(OBJECTS):%:%.c
+$(OBJECTS):%:%.cpp
 	@echo Compiling $<  to  $@
 	$(CC) -o $@ $< $(CFLAGS)
 
