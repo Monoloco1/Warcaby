@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-I. #-lsctp
+CFLAGS=-I. -std=c++20#-lsctp
 #CFLAGS=
 
 OBJECTS = warcaby_client warcaby_serwer
