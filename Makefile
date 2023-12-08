@@ -1,15 +1,7 @@
-CC=g++
-CFLAGS=-I. -std=c++20#-lsctp
-#CFLAGS=
+all: warcaby_client warcaby_server
 
-OBJECTS = warcaby_client warcaby_serwer
+warcaby_client:
+	g++ -L. warcaby_client.cpp warcaby.cpp -o warcaby_client -std=c++20
 
-all: $(OBJECTS)
-
-$(OBJECTS):%:%.cpp
-	@echo Compiling $<  to  $@
-	$(CC) -o $@ $< $(CFLAGS)
-
-	
-clean:
-	rm  $(OBJECTS) 
+warcaby_server:
+	g++ -L. warcaby_server.cpp warcaby.cpp -o warcaby_server -std=c++20
