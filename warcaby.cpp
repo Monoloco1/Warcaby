@@ -1,4 +1,3 @@
-
 #include "warcaby.h"
 
 void clearScreen() {
@@ -15,12 +14,13 @@ void clearScreen() {
 #endif
 }
 
-
 Warcaby::Warcaby() {
-    initializeBoard();
+	initializeBoard();
 }
+
+
 void Warcaby::initializeBoard() {
-    board.resize(boardSize, std::vector<char>(boardSize, ' '));
+    board.resize(boardSize, CV(boardSize, ' '));
 
     for (int i = 0; i < boardSize; ++i) {
         for (int j = 0; j < boardSize; ++j) {
@@ -36,9 +36,9 @@ void Warcaby::initializeBoard() {
     }
 }
 
-
 void Warcaby::printBoard() {
-    std::cout << "  0 1 2 3 4 5 6 7" << std::endl;
+    //std::cout << "  0 1 2 3 4 5 6 7" << std::endl;
+    std::cout << "  A B C D E F G H" << std::endl;
     for (int i = 0; i < boardSize; ++i) {
         std::cout << i << " ";
         for (int j = 0; j < boardSize; ++j) {
@@ -99,6 +99,22 @@ void Warcaby::makeMove(int fromRow, int fromCol, int toRow, int toCol, char play
     }
 }
 
+bool Warcaby::validateMakeMove(int fromRow, char fromCol, int toRow, char toCol, char player)  {
+    fromCol = std::toupper(fromCol);
+    toCol = std::toupper(toCol);
+    cout << fromRow << ' ' << fromCol << ' ' << toRow << ' ' << toCol << std::endl;
+    if(fromCol > 'H' || fromCol < 'A') return 0;
+    if(toCol > 'H' || toCol < 'A') return 0;
+
+    int fromColNum = min(7, max(0, fromCol - 'A'));
+    int toColNum = min(7, max(0, toCol - 'A'));
+     cout << fromColNum << ' ' << toColNum << std::endl;
+    if(isValidMove(fromRow, fromColNum, toRow, toColNum, player)) {
+        makeMove(fromRow, fromColNum, toRow, toColNum, player);
+        return true;
+    }
+    else return 0;
+}
 
 // check how many pieces each player has
 bool Warcaby::isGameOver() {
